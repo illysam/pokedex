@@ -1,15 +1,20 @@
 <template>
-  <img alt="Vue logo" src="./assets/International_Pokémon_logo.svg" />
-  <HelloWorld msg="Hello Vue 3.0 + Vite" />
+  <Header :email="config.email" :about="config.about" />
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import Header from './components/Header.vue'
+import config from './config.json'
 
 export default {
   name: 'App',
+  data(){
+    return {
+      config,
+    }
+  },
   components: {
-    HelloWorld
+    Header
   }
 }
 </script>
