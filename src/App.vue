@@ -1,8 +1,10 @@
 <template>
-  <Header :email="config.email" :about="config.about" />
+  <Header :email="config.email" :about="config.header.about" />
+  <Footer :text="config.footer.text"></Footer>
 </template>
 
 <script>
+import Footer from './components/Footer.vue'
 import Header from './components/Header.vue'
 import config from './config.json'
 
@@ -14,7 +16,8 @@ export default {
     }
   },
   components: {
-    Header
+    Header,
+    Footer,
   }
 }
 </script>
