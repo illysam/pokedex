@@ -1,9 +1,13 @@
 {
     "email": "illysam@gmail.com",
+    "footer": {
+        "text": "Thank you for using Pokédex! Consider donating to a worthy cause if it is useful to you."
+    },
     "header": {
         "about": "Would you like to learn more about Pokémons? The Pokédex is a handy tool to browse Pokémons, discover their abilities and revel in their prowess. It may not be indispensable, but it is a great addition to the Pokémon universe for new and old fans alike."
     },
-    "footer": {
-        "text": "Thank you for using Pokédex! Consider donating to a worthy cause if it is useful to you."
-    }
+    "main": {
+        "text": "Here, you can find all kinds of Pokémons. Find out how strong they are, what they look like and all kinds of other useful information."
+    },
+    "title": "Pokédex"
 }
