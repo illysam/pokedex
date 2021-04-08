@@ -14,7 +14,7 @@
       <div class="container">
 
         <div class="row">
-        <!-- this is where the cards go -->
+          <Card v-for="pokemon in pokemons" :key="pokemon.name" :name=pokemon.name :url=pokemon.url />
         </div>
       </div>
     </div>
@@ -22,9 +22,15 @@
 </template>
 
 <script>
+import Card from './Card.vue'
+
 export default {
   name: 'Main',
   props: {
+    pokemons: {
+      type: Array,
+      required: true,
+    },
     text: {
       type: String,
       required: true,
@@ -33,6 +39,12 @@ export default {
       type: String,
       required: true,
     }
+  },
+  created: function(){
+    this.$store.dispatch('initializePokemonPage')
+  },
+  components: {
+    Card,
   },
 }
 </script>
