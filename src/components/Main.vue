@@ -14,7 +14,7 @@
       <div class="container">
 
         <div class="row">
-          <Card v-for="pokemon in pokemons" :key="pokemon.name" :name=pokemon.name :url=pokemon.url />
+          <Card v-for="pokemon in pokemons" :key="pokemon.name" :name=pokemon.name />
         </div>
       </div>
     </div>
@@ -27,7 +27,7 @@ import Card from './Card.vue'
 export default {
   name: 'Main',
   props: {
-    pokemons: {
+    pokemonsOnPage: {
       type: Array,
       required: true,
     },
