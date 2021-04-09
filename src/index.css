@@ -51,3 +51,21 @@ footer p {
 }
 
 .box-shadow { box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05); }
+
+.card-img-top {
+  max-width: 10rem;
+  margin: 0 auto;
+}
+
+.card-title {
+  text-transform: uppercase;
+  font-weight: 600;
+}
+
+.card .list-item {
+  text-align: left;
+}
+
+.card-text {
+  margin-bottom: .25rem;
+}

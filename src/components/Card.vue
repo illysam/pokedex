@@ -1,17 +1,18 @@
 <template>
     <div class="col-md-4">
         <div class="card mb-4 box-shadow">
-            <img class="card-img-top" data-src="holder.js/100px225?theme=thumb&bg=55595c&fg=eceeef&text=Thumbnail" alt="Card image cap">
-            <div class="card-body">
-                <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                <div class="d-flex justify-content-between align-items-center">
-                    <div class="btn-group">
-                        <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-                        <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
-                    </div>
-                    <small class="text-muted">{{ name }} - {{ pokemon.id ?? undefined }}</small>
-                </div>
+          <img class="card-img-top" :src="pokemon?.sprites?.front_default" :alt="pokemon.name">
+          <div class="card-body">
+            <h5 class="card-title">{{ pokemon.name }}</h5>
+            <p class="card-text">Abilities</p>
+            <ul>
+              <li v-for="ability in pokemon.abilities" :key="ability.slot" class="list-item">{{ ability.ability.name }}</li>
+            </ul>
+            <div class="d-flex justify-content-between align-items-center">
+                <a :href="`/pokemon/${pokemon.name}/`" class="btn btn-sm btn-outline-secondary">Details</a>
+                <small class="text-muted">{{ name }}-{{ pokemon.id ?? undefined }}</small>
             </div>
+          </div>
         </div>
     </div>
 </template>
@@ -29,7 +30,6 @@ export default {
       type: String,
       required: true,
     },
-
   },
   created: async function(){
       this.pokemon = await this.$store.state.pokemons[this.name]()
