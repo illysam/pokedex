@@ -1,14 +1,26 @@
 export default class PokeApiClient {
-  constructor(uri = 'https://pokeapi.co/api/v2/', limit = 12) {
+  constructor(url = 'https://pokeapi.co/api/v2/', limit = 12) {
     this.limit = limit
-    this.uri = uri
+    this.url = url
   }
 
   async getPokemonsByPage(page = 1){
     const offset = (page - 1) * this.limit
-    const uri = `${this.uri}pokemon?limit=${this.limit}&offset=${offset}`
+    const url = `${this.url}pokemon?limit=${this.limit}&offset=${offset}`
 
-    const response = await fetch(uri)
+    const response = await fetch(url)
+    if(response.status >= 200 && response.status < 300){
+        return await response.json()
+    }
+    return {}
+  }
+
+  async getPokemonByUrl(url){
+    if(!url) {
+      return {}
+    }
+
+    const response = await fetch(url)
     if(response.status >= 200 && response.status < 300){
         return await response.json()
     }
