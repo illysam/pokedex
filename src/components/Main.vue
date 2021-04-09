@@ -18,8 +18,9 @@
       </div>
       <Pagination 
         :currentPage=this.$store.state.page
-        :next=this.$store.state.next
-        :previous=this.$store.state.previous
+        :hasNext=!!this.$store.state.next
+        :hasPrevious=!!this.$store.state.previous
+        :limit=this.$store.state.limit
         :totalNumberOfPages=this.$store.state.totalNumberOfPages 
       />
     </div>

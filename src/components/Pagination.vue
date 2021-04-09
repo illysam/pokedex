@@ -1,14 +1,14 @@
 <template>
   <nav aria-label="Pokemon page navigation">
     <ul class="pagination justify-content-center">
-      <li :class="[!!previous ? '' : 'disabled', 'page-item']">
-        <a class="page-link" href="#" tabindex="-1">Previous</a>
+      <li :class="[hasPrevious ? '' : 'disabled', 'page-item']">
+        <a class="page-link" :href="`/?offset=${offset(currentPage-1)}&limit=${limit}`" tabindex="-1">Previous</a>
       </li>
       <li :class="[this.currentPage === x ? 'active' : '', 'page-item']" v-for="x in range" :key="x">
-        <a class="page-link" href="#">{{ x }}<span v-if="this.currentPage === x" class="sr-only">(current)</span></a>
+        <a class="page-link" :href="`/?offset=${offset(x)}&limit=${limit}`">{{ x }}<span v-if="this.currentPage === x" class="sr-only">(current)</span></a>
       </li>
-      <li :class="[!!next ? '' : 'disabled', 'page-item']">
-        <a class="page-link" href="#">Next</a>
+      <li :class="[hasNext ? '' : 'disabled', 'page-item']">
+        <a class="page-link" :href="`/?offset=${offset(currentPage+1)}&limit=${limit}`">Next</a>
       </li>
     </ul>
   </nav>
@@ -19,17 +19,22 @@ const rangeMargin = 1;
 
 export default {
   name: 'Pagination',
-
   props: {
     currentPage: {
       type: Number,
       required: true,
     },
-    next: {
-      type: String,
+    hasNext: {
+      type: Boolean,
+      required: true,
     },
-    previous: {
-      type: String,
+    hasPrevious: {
+      type: Boolean,
+      required: true,
+    },
+    limit: {
+      type: Number,
+      required: true,
     },
     totalNumberOfPages: {
       type: Number,
@@ -49,7 +54,12 @@ export default {
         return this.totalNumberOfPages - rangeMargin
       }
       return this.currentPage - rangeMargin
-    }
-  }
+    },
+  },
+  methods: {
+    offset(page){
+      return (page - 1) * this.limit
+    },
+  },
 }
 </script>
