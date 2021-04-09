@@ -1,6 +1,6 @@
 <template>
   <Header :about="config.header.about" :email="config.email" :title="config.title" />
-  <Main :title="config.title" :text="config.main.text" :pokemons=this.$store.getters.pokemonsOnPage />
+  <Main :title="config.title" :text="config.main.text" :pokemonsOnPage=this.$store.getters.pokemonsOnPage />
   <Footer :text="config.footer.text"></Footer>
 </template>
 

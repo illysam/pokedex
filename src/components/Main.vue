@@ -14,7 +14,7 @@
       <div class="container">
 
         <div class="row">
-          <Card v-for="pokemon in pokemons" :key="pokemon.name" :name=pokemon.name />
+          <Card v-for="pokemon in pokemonsOnPage" :key="pokemon.name" :name=pokemon.name />
         </div>
       </div>
     </div>
