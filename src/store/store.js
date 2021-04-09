@@ -27,9 +27,12 @@ const store = createStore({
          state.page = payload.page
          state.pages[payload.page] = payload.pokemons
       },
-      setPokemons(state, payload){
-         console.log('setting pokemons', state, payload)
-         // state.page = payload
+      async setPokemons(state, payload){
+         for (const pokemon of payload) {
+            if(!state.pokemons[pokemon.name]){
+               state.pokemons[pokemon.name] = () => this.$pokeApiClient.getPokemonByUrl(pokemon.url)
+            }
+         }
       },
    },
 })
