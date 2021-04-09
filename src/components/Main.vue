@@ -12,17 +12,23 @@
 
     <div class="album py-5 bg-light">
       <div class="container">
-
         <div class="row">
           <Card v-for="pokemon in pokemonsOnPage" :key="pokemon.name" :name=pokemon.name />
         </div>
       </div>
+      <Pagination 
+        :currentPage=this.$store.state.page
+        :next=this.$store.state.next
+        :previous=this.$store.state.previous
+        :totalNumberOfPages=this.$store.state.totalNumberOfPages 
+      />
     </div>
   </main>
 </template>
 
 <script>
 import Card from './Card.vue'
+import Pagination from './Pagination.vue'
 
 export default {
   name: 'Main',
@@ -45,6 +51,7 @@ export default {
   },
   components: {
     Card,
+    Pagination,
   },
 }
 </script>
