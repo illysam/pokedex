@@ -9,8 +9,7 @@
                         <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
                         <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
                     </div>
-                    <small class="text-muted">{{ name }}</small>
-                    <small class="text-muted">{{ url }}</small>
+                    <small class="text-muted">{{ name }} - {{ pokemon.id ?? undefined }}</small>
                 </div>
             </div>
         </div>
@@ -20,15 +19,20 @@
 <script>
 export default {
   name: 'Card',
+  data(){
+    return {
+      pokemon: {}
+    }
+  },
   props: {
     name: {
       type: String,
       required: true,
     },
-    url: {
-      type: String,
-      required: true,
-    }
+
   },
+  created: async function(){
+      this.pokemon = await this.$store.state.pokemons[this.name]()
+  }
 }
 </script>
