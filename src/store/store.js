@@ -2,16 +2,21 @@ import { createStore } from 'vuex'
 import PokeApiClient from '../client/PokeApiClient'
 
 const pokeApiClient = new PokeApiClient()
+const apiUrl = 'https://pokeapi.co/api/v2/'
+const limit = 15
 
 const store = createStore({
    state:{
+      limit,
       page: 1,
       pages: {},
       pokemons: {},
    },
    actions: {
       async initializePokemonPage({ commit, state }){
-         const pokemonPage = await this.$pokeApiClient.getPokemonsByPage(state.page)
+         const offset = (state.page - 1) * state.limit
+         const url = `${apiUrl}pokemon?limit=${state.limit}&offset=${offset}`
+         const pokemonPage = await this.$pokeApiClient.get(url)
     
          commit('setPokemonPage', { page: state.page, pokemons: pokemonPage.results, })
          commit('setPokemons', pokemonPage.results)
@@ -30,7 +35,7 @@ const store = createStore({
       async setPokemons(state, payload){
          for (const pokemon of payload) {
             if(!state.pokemons[pokemon.name]){
-               state.pokemons[pokemon.name] = () => this.$pokeApiClient.getPokemonByUrl(pokemon.url)
+               state.pokemons[pokemon.name] = () => this.$pokeApiClient.get(pokemon.url)
             }
          }
       },
