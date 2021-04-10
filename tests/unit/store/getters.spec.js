@@ -41,5 +41,3 @@ describe('store getters', () => {
     expect(getters.pokemonsOnPage(state)).toEqual(pokemonsOnPage.results)
   })
 })
-
-// pokemonsOnPage: (state) => state.pages.has(state.page) ? state.pages.get(state.page).results : []
