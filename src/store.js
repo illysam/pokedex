@@ -32,8 +32,14 @@ const store = createStore({
       },
    },
    getters: {
+      pokemon: function(state, name){
+         if(state.pokemons.has(name)){
+            return state.pokemons.get(name)
+         }
+         return null
+      },
       pokemonsOnPage: function(state){
-         return !!state.pages.has(state.page) ? state.pages.get(state.page).results : []
+         return state.pages.has(state.page) ? state.pages.get(state.page).results : []
       },
    },
    mutations: {
@@ -47,6 +53,13 @@ const store = createStore({
       },
       setPokemonPage(state, pokemonPage){
          state.pages.set(state.page, pokemonPage)
+      },
+      async setPokemon(state, name){
+         if(!state.pokemons.has(name)){
+            const pokemonUrl = `${apiUrl}pokemon/${name}/`
+            const pokemonData = await this.$pokeApiClient.get(pokemonUrl)
+            state.pokemons.set(name, pokemonData)
+         }
       },
       async setPokemons(state, pokemons){
          for (const pokemon of pokemons) {
