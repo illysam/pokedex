@@ -56,7 +56,7 @@ export default {
       params.set('page', page)
       window.history.replaceState({}, '', `${location.pathname}?${params}`);
     }
-    this.$store.dispatch('setPokemonPage', page)
+    this.$store.dispatch('setPage', Number(page))
   },
   components: {
     Card,
@@ -64,7 +64,7 @@ export default {
   },
   watch: {
     $route(to, _) {
-      this.$store.dispatch('setPage', { page: Number(to.query.page) })
+      this.$store.dispatch('setPage', Number(to.query.page) )
     }
   }
 }
