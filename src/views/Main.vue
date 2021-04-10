@@ -67,7 +67,9 @@ export default {
   },
   watch: {
     $route(to, _) {
-      this.$store.dispatch('setPage', Number(to.query.page) )
+      if(to.name === 'main'){
+        this.$store.dispatch('setPage', Number(to.query.page) )
+      }
     },
   }
 }
