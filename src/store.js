@@ -28,13 +28,20 @@ const store = createStore({
          state.pokemonName = name
          if(!state.pokemons.has(name)){
             const url = `${apiUrl}pokemon/${name}/`
-            const pokemonData = await this.$pokeApiClient.get(url)
+            const data = await this.$pokeApiClient.get(url)
 
-            commit('setPokemon', pokemonData)
-            commit('addPokemon', {name, pokemonData})
-            // commit('setPokemonSpecies', [pokemonData])
+            commit('setPokemon', data)
+            commit('addPokemon', { name, data })
          } else {
             commit('setPokemon', state.pokemons.get(name))
+         }
+         if(!state.pokemonSpecies.has(state.pokemon.species.name)){
+            const data = await this.$pokeApiClient.get(state.pokemon.species.url)
+
+            commit('setSpecies', data)
+            commit('addPokemonSpecies', { name, data })
+         } else {
+            commit('setSpecies', state.pokemonSpecies.get(state.pokemon.species.name))
          }
       },
       async setPokemonPage({ commit, state }){
@@ -45,7 +52,6 @@ const store = createStore({
 
             commit('setPokemonPage', pokemonPage)
             commit('setPokemons', pokemonPage.results)
-            // commit('setPokemonSpecies', state.pokemons)
          }
          commit('setPagination', state.pages.get(state.page))
       },
@@ -57,7 +63,10 @@ const store = createStore({
    },
    mutations: {
       addPokemon(state, payload){
-         state.pokemons.set(payload.name, payload.pokemonData)
+         state.pokemons.set(payload.name, payload.data)
+      },
+      addPokemonSpecies(state, payload){
+         state.pokemonSpecies.set(payload.name, payload.data)
       },
       setPage(state, page){
          state.page = page
@@ -76,18 +85,13 @@ const store = createStore({
       async setPokemons(state, pokemons){
          for (const pokemon of pokemons) {
             if(!state.pokemons.has(pokemon.name)){
-               const pokemonData = await this.$pokeApiClient.get(pokemon.url)
-               state.pokemons.set(pokemon.name, pokemonData)
+               const data = await this.$pokeApiClient.get(pokemon.url)
+               state.pokemons.set(pokemon.name, data)
             }
          }
       },
-      async setPokemonSpecies(state, pokemons){
-         for (const pokemon of pokemons) {
-            if(!state.pokemonSpecies.has(pokemon?.species?.name)){
-               const pokemonSpeciesData = await this.$pokeApiClient.get(pokemon?.species?.url)
-               state.pokemonSpecies.set(pokemon?.species?.name, pokemonSpeciesData)
-            }
-         }
+      setSpecies(state, species){
+         state.species = species
       },
    },
 })
