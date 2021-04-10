@@ -10,8 +10,8 @@ const store = createStore({
       limit,
       next: null,
       page: 1,
-      pages: {},
-      pokemons: {},
+      pages: new Map(),
+      pokemons: new Map(),
       previous: null,
       totalNumberOfPages: 0,
    },
@@ -21,19 +21,19 @@ const store = createStore({
          await dispatch('setPokemonPage')
       },
       async setPokemonPage({ dispatch, commit, state }){
-         if(!state.pages[state.page]){
+         if(!state.pages.has(state.page)){
             const offset = (state.page - 1) * state.limit
             const url = `${apiUrl}pokemon?limit=${state.limit}&offset=${offset}`
             const pokemonPage = await this.$pokeApiClient.get(url)
             commit('setPokemonPage', pokemonPage)
             commit('setPokemons', pokemonPage.results)
          }
-         commit('setPagination', state.pages[state.page])
+         commit('setPagination', state.pages.get(state.page))
       },
    },
    getters: {
       pokemonsOnPage: function(state){
-         return !!state.pages[state.page] ? state.pages[state.page].results : []
+         return !!state.pages.has(state.page) ? state.pages.get(state.page).results : []
       },
    },
    mutations: {
@@ -46,12 +46,13 @@ const store = createStore({
          state.previous = pokemonPage.previous
       },
       setPokemonPage(state, pokemonPage){
-         state.pages[state.page] = pokemonPage
+         state.pages.set(state.page, pokemonPage)
       },
-      async setPokemons(state, payload){
-         for (const pokemon of payload) {
-            if(!state.pokemons[pokemon.name]){
-               state.pokemons[pokemon.name] = await this.$pokeApiClient.get(pokemon.url)
+      async setPokemons(state, pokemons){
+         for (const pokemon of pokemons) {
+            if(!state.pokemons.has(pokemon.name)){
+               const pokemonData = await this.$pokeApiClient.get(pokemon.url)
+               state.pokemons.set(pokemon.name, pokemonData)
             }
          }
       },

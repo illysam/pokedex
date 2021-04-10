@@ -13,7 +13,7 @@
     <div class="album py-5 bg-light">
       <div class="container">
         <div class="row">
-          <Card v-for="pokemon in pokemonsOnPage" :key="pokemon.name" :pokemon=$store.state.pokemons[pokemon.name] />
+          <Card v-for="pokemon in pokemonsOnPage" :key="pokemon.name" :pokemon=getPokemon(pokemon.name) />
         </div>
       </div>
       <Pagination 
@@ -60,6 +60,11 @@ export default {
     pokemonsOnPage(){
       return this.$store.getters.pokemonsOnPage
     }
+  },
+  methods: {
+    getPokemon(name){
+      return this.$store.state.pokemons.get(name)
+    },
   },
   watch: {
     $route(to, _) {
