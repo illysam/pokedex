@@ -27,6 +27,8 @@ To run the unit tests: `npm t`
 
 ### End-to-end (E2E) tests
 
+Make sure that the development server is running before launching the E2E tests (see [above](#get-started)).
+
 Headless mode: `npm run cypress:run`
 
 In the browser: `npm run cypress:open`
