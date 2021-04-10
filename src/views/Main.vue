@@ -36,7 +36,6 @@ export default {
   name: 'Main',
   data() {
     return {
-      content,
       text: content.main.text,
       title: content.title,
     }
