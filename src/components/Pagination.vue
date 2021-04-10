@@ -5,7 +5,7 @@
         <router-link class="page-link" :to="{name:'main', query: {page: currentPage-1}}">Previous</router-link>
       </li>
       <li :class="[this.currentPage === x ? 'active' : '', 'page-item']" v-for="x in range" :key="x">
-        <router-link class="page-link" :to="{name:'main', query: {page: x}}">{{ x }}<span v-if="this.currentPage === x" class="sr-only">(current)</span></router-link>
+        <router-link class="page-link" :to="{name:'main', query: {page: x}}" :data-cy="`link-${x}`">{{ x }}<span v-if="this.currentPage === x" class="sr-only">(current)</span></router-link>
       </li>
       <li :class="[hasNext ? '' : 'disabled', 'page-item']">
         <router-link class="page-link" :to="{name:'main', query: {page: currentPage+1}}">Next</router-link>
@@ -15,51 +15,51 @@
 </template>
 
 <script>
-const rangeMargin = 1;
+const rangeMargin = 1
 
 export default {
   name: 'Pagination',
   props: {
     currentPage: {
       type: Number,
-      required: true,
+      required: true
     },
     hasNext: {
       type: Boolean,
-      required: true,
+      required: true
     },
     hasPrevious: {
       type: Boolean,
-      required: true,
+      required: true
     },
     limit: {
       type: Number,
-      required: true,
+      required: true
     },
     totalNumberOfPages: {
       type: Number,
-      required: true,
-    },
+      required: true
+    }
   },
   computed: {
-    range(){
-      return Array.from({ length: 3 }, (_, i) => this.start + i);
+    range () {
+      return Array.from({ length: 3 }, (_, i) => this.start + i)
     },
-    start(){
-      if(this.currentPage === rangeMargin || this.currentPage <= 0){
+    start () {
+      if (this.currentPage === rangeMargin || this.currentPage <= 0) {
         return 1
       }
-      if(this.currentPage === this.totalNumberOfPages - rangeMargin ||
-      this.currentPage >= this.totalNumberOfPages){
+      if (this.currentPage === this.totalNumberOfPages - rangeMargin ||
+      this.currentPage >= this.totalNumberOfPages) {
         return this.totalNumberOfPages - rangeMargin
       }
       return this.currentPage - rangeMargin
-    },
+    }
   },
   methods: {
-    offset(page){
+    offset (page) {
       return (page - 1) * this.limit
-    },
-  },
+    }
+  }
 }
 </script>
