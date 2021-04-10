@@ -57,15 +57,6 @@ footer p {
   margin: 0 auto;
 }
 
-.card-title {
-  text-transform: uppercase;
-  font-weight: 600;
-}
-
-.card .list-item {
-  text-align: left;
-}
-
-.card-text {
-  margin-bottom: .25rem;
+.jumbotron-image-small {
+  max-width: 10rem;
 }
