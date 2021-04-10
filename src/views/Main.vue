@@ -13,7 +13,7 @@
     <div class="album py-5 bg-light">
       <div class="container">
         <div class="row">
-          <Card v-for="pokemon in pokemonsOnPage" :key="pokemon.name" :name=pokemon.name />
+          <Card v-for="pokemon in pokemonsOnPage" :key="pokemon.name" :pokemon=$store.state.pokemons[pokemon.name] />
         </div>
       </div>
       <Pagination 
@@ -48,16 +48,15 @@ export default {
     }
   },
   created: function(){
-    this.$store.dispatch('initializePokemonPage')
+    this.$store.dispatch('setPokemonPage')
   },
   components: {
     Card,
     Pagination,
   },
   watch: {
-    $route(to, from) {
-      
-      console.log(to, from)
+    $route(to, _) {
+      this.$store.dispatch('setPage', { page: Number(to.query.page) })
     }
   }
 }
