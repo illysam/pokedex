@@ -10,7 +10,7 @@
     "cypress:open": "cypress open",
     "cypress:run": "cypress run --spec ./cypress/integration/pokedex.spec.js",
     "dev": "vite",
-    "eslint": "eslint src/* cypress/integration/pokedex.spec.js --fix --format table --ext .js --ext .vue",
+    "eslint": "eslint src/* tests/**/* cypress/integration/*.spec.js --fix --format table --ext .js --ext .vue",
     "test": "jest"
   },
   "dependencies": {
