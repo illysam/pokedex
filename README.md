@@ -1,6 +1,6 @@
-# pokedex
+# Pokédex
 
-Pokedex is a small app to visualize Pokemons and some oftheir characteristics.
+Pokédex is a small app to visualize Pokémons and some of their characteristics.
 
 It uses Vue, JavaScript and Bootstrap. The markup is based on the [Bootstrap album example](https://getbootstrap.com/docs/4.0/examples/album/).
 
