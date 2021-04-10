@@ -5,7 +5,7 @@
         <p>
           <img class="image-fluid" alt="Pokémon logo" src="../assets/International_Pokémon_logo.svg" />
         </p>
-        <h1 class="jumbotron-heading">{{ title }}</h1>
+        <h1 class="jumbotron-heading" data-cy="title">{{ title }}</h1>
         <p class="lead text-muted">{{ text }}</p>
       </div>
     </section>
@@ -16,12 +16,12 @@
           <Card v-for="pokemon in pokemonsOnPage" :key="pokemon.name" :pokemon=getPokemon(pokemon.name) />
         </div>
       </div>
-      <Pagination 
+      <Pagination
         :currentPage=this.$store.state.page
         :hasNext=!!this.$store.state.next
         :hasPrevious=!!this.$store.state.previous
         :limit=this.$store.state.limit
-        :totalNumberOfPages=this.$store.state.totalNumberOfPages 
+        :totalNumberOfPages=this.$store.state.totalNumberOfPages
       />
     </div>
   </main>
@@ -34,43 +34,43 @@ import content from '../content.json'
 
 export default {
   name: 'Main',
-  data() {
+  data () {
     return {
       text: content.main.text,
-      title: content.title,
+      title: content.title
     }
   },
-  created: function(){
-    const params = new URLSearchParams(document.location.search);
+  created: function () {
+    const params = new URLSearchParams(document.location.search)
 
     let page = params.get('page')
-    if(!page) {
+    if (!page) {
       page = 1
       params.set('page', page)
-      window.history.replaceState({}, '', `${location.pathname}?${params}`);
+      window.history.replaceState({}, '', `${location.pathname}?${params}`)
     }
     this.$store.dispatch('setPage', Number(page))
   },
   components: {
     Card,
-    Pagination,
+    Pagination
   },
   computed: {
-    pokemonsOnPage(){
+    pokemonsOnPage () {
       return this.$store.getters.pokemonsOnPage
     }
   },
   methods: {
-    getPokemon(name){
+    getPokemon (name) {
       return this.$store.state.pokemons.get(name)
-    },
+    }
   },
   watch: {
-    $route(to, _) {
-      if(to.name === 'main'){
-        this.$store.dispatch('setPage', Number(to.query.page) )
+    $route (to, _) {
+      if (to.name === 'main') {
+        this.$store.dispatch('setPage', Number(to.query.page))
       }
-    },
+    }
   }
 }
 </script>
