@@ -36,16 +36,16 @@ export default {
   props: {
     about: {
       type: String,
-      required: true,
+      required: true
     },
     email: {
       type: String,
-      required: true,
+      required: true
     },
     title: {
       type: String,
-      required: true,
-    },
-  },
+      required: true
+    }
+  }
 }
 </script>
