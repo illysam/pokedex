@@ -46,7 +46,7 @@
           </table>
         </div>
         <div class="mt-5">
-          <router-link class="btn btn-primary" role="button" :to="{name:'main', query: {page: 1}}">Back to list</router-link>
+          <router-link class="btn btn-primary" role="button" :to="{name:'main', query: {page: this.$store.state.page }}">Back to list</router-link>
         </div>
       </div>
     </section>
@@ -77,9 +77,6 @@ export default {
     $route(to, _) {
       if(to.name === 'pokemon'){
         this.$store.dispatch('setPokemon', to.params.name)
-      }
-      if(to.name === 'main'){
-        this.$router.replace({name: to.name, query: { page: this.$store.state.page }})
       }
     },
   }
