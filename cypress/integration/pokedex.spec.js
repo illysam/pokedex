@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 
 describe('Pokédex e2e tests', () => {
   describe('main page', () => {
