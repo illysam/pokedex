@@ -2,13 +2,13 @@
   <nav aria-label="Pokemon page navigation">
     <ul class="pagination justify-content-center">
       <li :class="[hasPrevious ? '' : 'disabled', 'page-item']">
-        <a class="page-link" :href="`/?offset=${offset(currentPage-1)}&limit=${limit}`" tabindex="-1">Previous</a>
+        <router-link class="page-link" :to="{name:'main', query: {offset: offset(currentPage-1), limit}}">Previous</router-link>
       </li>
       <li :class="[this.currentPage === x ? 'active' : '', 'page-item']" v-for="x in range" :key="x">
-        <a class="page-link" :href="`/?offset=${offset(x)}&limit=${limit}`">{{ x }}<span v-if="this.currentPage === x" class="sr-only">(current)</span></a>
+        <router-link class="page-link" :to="{name:'main', query: {offset: offset(x), limit}}">{{ x }}<span v-if="this.currentPage === x" class="sr-only">(current)</span></router-link>
       </li>
       <li :class="[hasNext ? '' : 'disabled', 'page-item']">
-        <a class="page-link" :href="`/?offset=${offset(currentPage+1)}&limit=${limit}`">Next</a>
+        <router-link class="page-link" :to="{name:'main', query: {offset: offset(currentPage+1), limit}}">Next</router-link>
       </li>
     </ul>
   </nav>
