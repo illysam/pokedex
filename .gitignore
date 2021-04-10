@@ -3,3 +3,5 @@ node_modules
 dist
 dist-ssr
 *.local
+cypress/fixtures/example.json
+cypress/integration/examples

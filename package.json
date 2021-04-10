@@ -7,12 +7,15 @@
   },
   "license": "Unlicense",
   "scripts": {
+    "cypress:open": "cypress open",
+    "cypress:run": "cypress run",
     "dev": "vite",
     "build": "vite build",
     "eslint": "eslint src/* --fix --format table --ext .js --ext .vue"
   },
   "dependencies": {
     "bootstrap": "^4.6.0",
+    "cypress": "^7.0.1",
     "jquery": "^3.6.0",
     "popper.js": "^1.16.1",
     "vue": "^3.0.4",
