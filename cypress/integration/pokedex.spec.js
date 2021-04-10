@@ -23,4 +23,22 @@ describe('Pokédex e2e tests', () => {
       })
     })
   })
+
+  describe('pokemon page', () => {
+    const pokemonName = 'bulbasaur'
+
+    it(`visit individual page for ${pokemonName}`, () => {
+      cy.visit('http://localhost:3000')
+
+      console.log(`a[data-cy=pokemon-${pokemonName}]`)
+
+      cy.get(`[data-cy=pokemon-${pokemonName}]`).click()
+
+      cy.get('[data-cy=title]').should('not.be.empty').should('have.text', pokemonName)
+
+      cy.location().should((location) => {
+        expect(location.pathname).to.equal(`/pokemon/${pokemonName}/`)
+      })
+    })
+  })
 })
