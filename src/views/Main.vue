@@ -28,8 +28,8 @@
 </template>
 
 <script>
-import Card from './Card.vue'
-import Pagination from './Pagination.vue'
+import Card from '../components/Card.vue'
+import Pagination from '../components/Pagination.vue'
 
 export default {
   name: 'Main',
@@ -54,5 +54,11 @@ export default {
     Card,
     Pagination,
   },
+  watch: {
+    $route(to, from) {
+      
+      console.log(to, from)
+    }
+  }
 }
 </script>

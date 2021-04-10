@@ -1,5 +1,5 @@
 import { createStore } from 'vuex'
-import PokeApiClient from '../client/PokeApiClient'
+import PokeApiClient from './client/PokeApiClient'
 
 const pokeApiClient = new PokeApiClient()
 const apiUrl = 'https://pokeapi.co/api/v2/'
