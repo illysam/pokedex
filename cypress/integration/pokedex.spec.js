@@ -5,7 +5,7 @@ describe('Pokédex e2e tests', () => {
     const pageToVisit = 3
 
     it('visit the pokedex', () => {
-      cy.visit('http://localhost:3000')
+      cy.visit('/')
 
       cy.location().should((location) => {
         expect(location.search).to.equal('?page=1')
@@ -15,7 +15,7 @@ describe('Pokédex e2e tests', () => {
     })
 
     it(`visit page ${pageToVisit} of the pokedex`, () => {
-      cy.visit('http://localhost:3000')
+      cy.visit('/')
 
       cy.get(`[data-cy=link-${pageToVisit}]`).click()
 
@@ -30,7 +30,7 @@ describe('Pokédex e2e tests', () => {
     const pokemonNameEvolves = 'ivysaur'
 
     it(`visit individual page for ${pokemonName}`, () => {
-      cy.visit('http://localhost:3000')
+      cy.visit('/')
 
       console.log(`a[data-cy=pokemon-${pokemonName}]`)
 
@@ -44,7 +44,7 @@ describe('Pokédex e2e tests', () => {
     })
 
     it(`visit individual page for ${pokemonNameEvolves} with link to 'evolves from'`, () => {
-      cy.visit('http://localhost:3000')
+      cy.visit('/')
 
       console.log(`a[data-cy=pokemon-${pokemonNameEvolves}]`)
 
