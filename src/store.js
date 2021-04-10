@@ -18,10 +18,10 @@ const store = createStore({
    actions: {
       async setPage({ dispatch, commit }, page){
          commit('setPage', page)
-         await dispatch('setPokemonPage', page)
+         await dispatch('setPokemonPage')
       },
-      async setPokemonPage({ commit, state }, page){
-         const offset = (page - 1) * state.limit
+      async setPokemonPage({ commit, state }){
+         const offset = (state.page - 1) * state.limit
          const url = `${apiUrl}pokemon?limit=${state.limit}&offset=${offset}`
          const pokemonPage = await this.$pokeApiClient.get(url)
     
