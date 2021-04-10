@@ -48,7 +48,15 @@ export default {
     }
   },
   created: function(){
-    this.$store.dispatch('setPokemonPage')
+    const params = new URLSearchParams(document.location.search);
+
+    let page = params.get('page')
+    if(!page) {
+      page = 1
+      params.set('page', page)
+      window.history.replaceState({}, '', `${location.pathname}?${params}`);
+    }
+    this.$store.dispatch('setPokemonPage', page)
   },
   components: {
     Card,

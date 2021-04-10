@@ -16,12 +16,12 @@ const store = createStore({
       totalNumberOfPages: 0,
    },
    actions: {
-      async setPage({ dispatch, commit, state }, payload){
-         state.page = payload.page
-         await dispatch('setPokemonPage')
+      async setPage({ dispatch, commit }, page){
+         commit('setPage', page)
+         await dispatch('setPokemonPage', page)
       },
-      async setPokemonPage({ commit, state }){
-         const offset = (state.page - 1) * state.limit
+      async setPokemonPage({ commit, state }, page){
+         const offset = (page - 1) * state.limit
          const url = `${apiUrl}pokemon?limit=${state.limit}&offset=${offset}`
          const pokemonPage = await this.$pokeApiClient.get(url)
     
@@ -36,6 +36,9 @@ const store = createStore({
       }
    },
    mutations: {
+      setPage(state, payload){
+         state.page = payload.page
+      },
       setPagination(state, payload){
          state.totalNumberOfPages = Math.ceil(payload.count / state.limit)
          state.next = payload.next
