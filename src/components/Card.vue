@@ -14,6 +14,11 @@
             </div>
           </div>
         </div>
+        <div class="card mb-4 box-shadow d-flex justify-content-between align-items-center card-loading" v-else>
+          <div class="spinner-grow text-secondary" role="status">
+            <span class="sr-only">Loading...</span>
+          </div>
+        </div>
     </div>
 </template>
 

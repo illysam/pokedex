@@ -60,3 +60,14 @@ footer p {
 .jumbotron-image-small {
   max-width: 10rem;
 }
+
+.card-loading {
+  height: 20rem;
+  position: relative;
+}
+
+.card-loading div {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+}
