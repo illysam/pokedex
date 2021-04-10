@@ -30,21 +30,15 @@
 <script>
 import Card from '../components/Card.vue'
 import Pagination from '../components/Pagination.vue'
+import content from '../content.json'
 
 export default {
   name: 'Main',
-  props: {
-    pokemonsOnPage: {
-      type: Array,
-      required: true,
-    },
-    text: {
-      type: String,
-      required: true,
-    },
-    title: {
-      type: String,
-      required: true,
+  data() {
+    return {
+      content,
+      text: content.main.text,
+      title: content.title,
     }
   },
   created: function(){
@@ -62,10 +56,15 @@ export default {
     Card,
     Pagination,
   },
+  computed: {
+    pokemonsOnPage(){
+      return this.$store.getters.pokemonsOnPage
+    }
+  },
   watch: {
     $route(to, _) {
       this.$store.dispatch('setPage', Number(to.query.page) )
-    }
+    },
   }
 }
 </script>
