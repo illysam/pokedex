@@ -78,6 +78,9 @@ export default {
       if(to.name === 'pokemon'){
         this.$store.dispatch('setPokemon', to.params.name)
       }
+      if(to.name === 'main'){
+        this.$router.replace({name: to.name, query: { page: this.$store.state.page }})
+      }
     },
   }
 }
