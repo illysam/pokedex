@@ -5,13 +5,13 @@
     "name": "Dr. Rolf Schmidt",
     "email": "illysam@gmail.com"
   },
-  "license": "Unlicense",
   "scripts": {
+    "build": "vite build",
     "cypress:open": "cypress open",
     "cypress:run": "cypress run --spec ./cypress/integration/pokedex.spec.js",
     "dev": "vite",
-    "build": "vite build",
-    "eslint": "eslint src/* cypress/integration/pokedex.spec.js --fix --format table --ext .js --ext .vue"
+    "eslint": "eslint src/* cypress/integration/pokedex.spec.js --fix --format table --ext .js --ext .vue",
+    "test": "jest"
   },
   "dependencies": {
     "bootstrap": "^4.6.0",
@@ -25,13 +25,18 @@
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "^4.21.0",
     "@typescript-eslint/parser": "^4.21.0",
+    "@vue/cli-plugin-unit-jest": "^4.5.12",
     "@vue/compiler-sfc": "^3.0.4",
+    "@vue/test-utils": "^2.0.0-rc.4",
     "eslint": "^7.24.0",
     "eslint-config-standard": "^16.0.2",
     "eslint-plugin-import": "^2.22.1",
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-promise": "^4.3.1",
     "eslint-plugin-vue": "^7.8.0",
-    "vite": "^1.0.0-rc.13"
-  }
+    "typescript": "~3.9.3",
+    "vite": "^1.0.0-rc.13",
+    "vue-jest": "^5.0.0-0"
+  },
+  "license": "Unlicense"
 }
