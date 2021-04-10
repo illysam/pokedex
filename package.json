@@ -8,10 +8,10 @@
   "license": "Unlicense",
   "scripts": {
     "cypress:open": "cypress open",
-    "cypress:run": "cypress run",
+    "cypress:run": "cypress run --spec ./cypress/integration/pokedex.spec.js",
     "dev": "vite",
     "build": "vite build",
-    "eslint": "eslint src/* --fix --format table --ext .js --ext .vue"
+    "eslint": "eslint src/* cypress/integration/pokedex.spec.js --fix --format table --ext .js --ext .vue"
   },
   "dependencies": {
     "bootstrap": "^4.6.0",
