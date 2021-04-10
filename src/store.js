@@ -12,6 +12,7 @@ const store = createStore({
       page: 1,
       pages: new Map(),
       pokemons: new Map(),
+      pokemonSpecies: new Map(),
       previous: null,
       totalNumberOfPages: 0,
    },
@@ -20,7 +21,7 @@ const store = createStore({
          commit('setPage', page)
          await dispatch('setPokemonPage')
       },
-      async setPokemonPage({ dispatch, commit, state }){
+      async setPokemonPage({ commit, state }){
          if(!state.pages.has(state.page)){
             const offset = (state.page - 1) * state.limit
             const url = `${apiUrl}pokemon?limit=${state.limit}&offset=${offset}`
@@ -41,6 +42,12 @@ const store = createStore({
       pokemonsOnPage: function(state){
          return state.pages.has(state.page) ? state.pages.get(state.page).results : []
       },
+      pokemonSpecies: function(state, name){
+         if(state.pokemonSpecies.has(name)){
+            return state.pokemonSpecies.get(name)
+         }
+         return null
+      },
    },
    mutations: {
       setPage(state, page){
@@ -56,8 +63,8 @@ const store = createStore({
       },
       async setPokemon(state, name){
          if(!state.pokemons.has(name)){
-            const pokemonUrl = `${apiUrl}pokemon/${name}/`
-            const pokemonData = await this.$pokeApiClient.get(pokemonUrl)
+            const url = `${apiUrl}pokemon/${name}/`
+            const pokemonData = await this.$pokeApiClient.get(url)
             state.pokemons.set(name, pokemonData)
          }
       },
@@ -68,6 +75,17 @@ const store = createStore({
                state.pokemons.set(pokemon.name, pokemonData)
             }
          }
+      },
+      async setPokemonSpecies(state, pokemonName){
+         if(state.pokemons.has(pokemonName)){
+            const pokemon = state.pokemons.get(pokemonName)
+            if(!state.pokemonSpecies.has(pokemon.species.name)){
+               const url = `${apiUrl}pokemon-species/${pokemon.species.name}/`
+               const speciesData = await this.$pokeApiClient.get(url)
+               state.pokemonSpecies.set(pokemon.species.name, speciesData)
+            }
+         }
+         return null
       },
    },
 })

@@ -6,7 +6,10 @@
           <img class="image-fluid jumbotron-image-small border border-dark rounded" :src="pokemon?.sprites?.front_default" :alt="pokemon?.name" />
         </p>
         <h1 class="jumbotron-heading text-uppercase">{{ pokemon?.name }}</h1>
-        <p class="lead text-muted">{{ pokemon?.name }}</p>
+        <p class="lead text-muted" v-if="!!pokemonSpecies?.evolves_from_species">
+          Evolves from <router-link class="text-capitalize" :to="{name: 'pokemon', params: { name: pokemonSpecies.evolves_from_species.name }}">{{ pokemonSpecies.evolves_from_species.name }}</router-link>
+        </p>
+        <!-- <p class="lead text-muted" v-else>{{ pokemonSpecies.evolves_from_species.name }}</p> -->
         <div class="container w-50 d-flex justify-content-between">
           <table class="table table-sm  table-striped">
             <thead>
@@ -61,12 +64,25 @@ export default {
   computed: {
     pokemon(){
       return this.$store.state.pokemons.get(this.$route.params.name)
-    }
+    },
+    pokemonSpecies(){
+      return this.$store.state.pokemonSpecies.get(this.pokemon?.species.name)
+    },
   },
   methods: {
     getStat: function(name){
       return this.pokemon?.stats.find((stat) => stat.stat.name === name).base_stat ?? 'na'
     }
+  },
+  watch: {
+    pokemon: function (){
+      if(!!this.pokemon){
+        this.$store.commit('setPokemonSpecies', this.pokemon.species.name)
+      }
+    },
+    $route(to, _) {
+      this.$store.dispatch('setPage', Number(to.query.page) )
+    },
   }
 }
 </script>
